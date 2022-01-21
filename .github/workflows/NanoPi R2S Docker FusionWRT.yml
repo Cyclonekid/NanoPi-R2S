@@ -55,14 +55,6 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         
-    - name: Cache
-      uses: klever1988/cachewrtbuild@main
-      with:
-        ccache: 'true'
-        prefix: ${{ github.workspace }}/openwrt
-        # clean: 'false'
-        clean: 'true'
-        
     - name: Free up disk space
       if: env.FREE_UP_DISK == 'true'
       env:
@@ -263,7 +255,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: ${{ steps.tag.outputs.release_date }} NanoPi-R2S formal edition_Docker版_全插件
+          name: ${{ steps.tag.outputs.release_date }} NanoPi-R2S_Docker版_稳定
           tag_name: ${{ steps.tag.outputs.release_tag }}
           body_path: release.txt
           files: ${{ env.FIRMWARE }}/*
